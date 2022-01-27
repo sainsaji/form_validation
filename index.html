@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <h1
+      class="text-green text-center font-weight-bold"
+      style="font-size: 40px;"
+    >
+      Form Validation In JavaScript
+    </h1>
+
+    <h4 class="text-blue text-center font-weight-bold" style="font-size: 20px;">
+      Sign Up
+    </h4>
+
+    <div class="container">
+      <br />
+
+      <div class="col-lg-5 m-auto d-block">
+        <form action="#" onsubmit="return validation()" class="bg-light">
+          <div class="form-group">
+            <label for="name" class="font-weight-regular"> Name </label>
+            <input
+              type="text"
+              name="name"
+              class="form-control"
+              id="name"
+              autocomplete="off"
+              onkeypress="return validateAlphabets(event)"
+            />
+            
+            <span id="Name" class="text-danger font-weight-regular"> </span>
+          </div>
+
+          <div class="form-group">
+            <label class="font-weight-regular"> Email </label>
+            <input
+              type="text"
+              name="email"
+              class="form-control"
+              id="emails"
+              autocomplete="off"
+            />
+            <span id="emailids" class="text-danger font-weight-regular"> </span>
+          </div>
+
+          <div class="form-group">
+            <label for="user" class="font-weight-regular"> Username </label>
+            <input
+              type="text"
+              name="user"
+              class="form-control"
+              id="user"
+              autocomplete="off"
+            />
+            <span id="username" class="text-danger font-weight-regular"> </span>
+          </div>
+
+          <div class="form-group">
+            <label class="font-weight-regular"> Password </label>
+            <input
+              type="password"
+              name="pass"
+              class="form-control"
+              id="pass"
+              autocomplete="off"
+            />
+            <span id="passwords" class="text-danger font-weight-regular">
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="font-weight-regular"> Confirm Password </label>
+            <input
+              type="password"
+              name="conpass"
+              class="form-control"
+              id="conpass"
+              autocomplete="off"
+            />
+            <span id="confrmpass" class="text-danger font-weight-regular">
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label class="font-weight-regular"> Mobile Number </label>
+            <input
+              type="text"
+              name="mobile"
+              class="form-control"
+              id="mobileNumber"
+              autocomplete="off"
+              onkeypress="return validateNumber(event)"
+            />
+            <span id="mobileno" class="text-danger font-weight-regular"> </span>
+          </div>
+
+          <input
+            type="submit"
+            name="submit"
+            value="Submit"
+            class="btn btn-primary"
+            autocomplete="off"
+          />
+          <input
+            type="reset"
+            name="reset"
+            value="Reset"
+            class="btn btn-secondary"
+            autocomplete="off"
+          />
+          &emsp;&emsp;&emsp;Already have an account?
+          <a href="login.html">Login</a>
+        </form>
+
+        <br /><br />
+      </div>
+    </div>
+
+    <script type="text/javascript">
+
+      //to disable numbers in input
+      function validateAlphabets(event) {
+        var charCode = (event.which) ? event.which : event.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+          return true;
+        }
+        document.getElementById("Name").innerHTML =
+            "Numbers are disabled";
+          return false;
+        }
+
+        function validateNumber(event) {
+        var charCode = (event.which) ? event.which : event.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+          return false;
+        }
+        
+          return true;
+        }
+      function validation() {
+        var name = document.getElementById("name").value;
+        var user = document.getElementById("user").value;
+        var pass = document.getElementById("pass").value;
+        var confirmpass = document.getElementById("conpass").value;
+        var mobileNumber = document.getElementById("mobileNumber").value;
+        var emails = document.getElementById("emails").value;
+
+        if (name == "") {
+          document.getElementById("Name").innerHTML =
+            "  Please fill the Name field";
+          return false;
+        }
+        var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,<>\/?]+/;
+
+        if(format.test(name)){
+          document.getElementById("Name").innerHTML =
+            "No Special Characters allowed";
+        } else {
+          document.getElementById("Name").innerHTML =
+            " ";
+        }
+        if (emails == "") {
+          document.getElementById("emailids").innerHTML =
+            "  Please fill the email id field";
+          return false;
+        }
+        if (emails.indexOf("@automania.in") <= 0) {
+          document.getElementById("emailids").innerHTML = "  Invalid Email";
+          return false;
+        }
+        else
+        {
+          document.getElementById("emailids").innerHTML = " ";
+        }
+
+        if (
+          emails.charAt(emails.length - 4) != "." &&
+          emails.charAt(emails.length - 3) != "."
+        ) {
+          document.getElementById("emailids").innerHTML = "  Invalid Email";
+          return false;
+        }
+
+        if (user == "") {
+          document.getElementById("username").innerHTML =
+            "  Please fill the username field";
+          return false;
+        }
+        if (user.length <= 3 || user.length > 20) {
+          document.getElementById("username").innerHTML =
+            "  Username lenght must be between 3 and 20";
+          return false;
+        }
+        if (!isNaN(user)) {
+          document.getElementById("username").innerHTML =
+            "  only characters are allowed";
+          return false;
+        }
+
+        if (pass == "") {
+          document.getElementById("passwords").innerHTML =
+            "  Please fill the password field";
+          return false;
+        }
+        if (pass.length <= 8 || pass.length > 20) {
+          document.getElementById("passwords").innerHTML =
+            "Passwords lenght must be between  8 and 20";
+          return false;
+          
+        
+        }
+
+        re = /[0-9]/;
+        if(!re.test(pass)) {
+          document.getElementById("passwords").innerHTML =
+            "Password should contain a number";
+          return false;
+        pass.focus();
+        return false;
+        }
+
+        re = /[a-z]/;
+        if(!re.test(pass)) {
+          document.getElementById("passwords").innerHTML =
+            "Password should contain a lowercase character";
+          return false;
+        pass.focus();
+        return false;
+        }
+
+        re = /[A-Z]/;
+        if(!re.test(pass)) {
+          document.getElementById("passwords").innerHTML =
+            "Password should contain a uppercase character";
+          return false;
+        pass.focus();
+        return false;
+        }
+
+        var re = /[!@#\$%\^\&*\)\(+=._-]/
+        if(!re.test(pass)) {
+          document.getElementById("passwords").innerHTML =
+            "Password should contain a special character";
+          return false;
+        pass.focus();
+        return false;
+        }
+        
+        
+        if (confirmpass == "") {
+          document.getElementById("confrmpass").innerHTML =
+            "  Please fill the confirm password field";
+          return false;
+        }
+        if (pass != confirmpass) {
+          document.getElementById("confrmpass").innerHTML =
+            "  Password Mismatch";
+          return false;
+        }
+
+
+        if (mobileNumber == "") {
+          document.getElementById("mobileno").innerHTML =
+            "  Please fill the mobile NUmber field";
+          return false;
+        }
+        if (isNaN(mobileNumber)) {
+          document.getElementById("mobileno").innerHTML =
+            "  user must write digits only not characters";
+          return false;
+        }
+        if (mobileNumber.length != 10) {
+          document.getElementById("mobileno").innerHTML =
+            "  Mobile Number must be 10 digits only";
+          return false;
+        }
+      }
+    </script>
+  </body>
+</html>
