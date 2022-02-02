@@ -132,7 +132,6 @@
     </div>
 
     <script type="text/javascript">
-
       //to disable numbers in input
       function validateAlphabets(event) {
         var charCode = (event.which) ? event.which : event.keyCode;
@@ -201,6 +200,9 @@
             "  Please fill the username field";
           return false;
         }
+        else {
+          document.getElementById("username").innerHTML =
+            " ";
         if (user.length <= 3 || user.length > 20) {
           document.getElementById("username").innerHTML =
             "  Username lenght must be between 3 and 20";
@@ -290,6 +292,8 @@
           return false;
         }
       }
+
+
     </script>
   </body>
 </html>
